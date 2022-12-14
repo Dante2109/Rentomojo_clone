@@ -64,7 +64,7 @@ import {
               <DesktopNav />
             </Flex> */}
           </Flex>
-            <Input display={{base:"none",md:"inline-flex"}} placeholder="Search" width={[80,100,200,200,400]} mr="10px" />
+            <Input display={{base:"none",md:"inline-flex"}} placeholder="Search" width={[80,100,200,250,300]} mr="10px" />
           <Stack
             flex={{ base: 1, md: 0 }}
             justify={'flex-end'}
