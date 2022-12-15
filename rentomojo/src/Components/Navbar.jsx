@@ -1,4 +1,6 @@
 import Logo from "../Photos/Daco_6048519.png"
+import {Simple_Modal} from "./Modal"
+import React from "react";
 import {
     Box,
     Flex,
@@ -25,6 +27,7 @@ import {
     ChevronRightIcon,
   } from '@chakra-ui/icons';
   import { AiOutlineShoppingCart } from "react-icons/ai";
+
 
   export default function Navbar() {
     const { isOpen, onToggle } = useDisclosure();
@@ -58,8 +61,9 @@ import {
             />
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-                <Image src={Logo} htmlWidth="100px" alt='Dan Abramov' />
-               {isOpen?<Text px={"30px"}>Bangalore</Text>:""}
+                <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8KdSf8-GojXhMVWiyraRD2RozGH1QAmMYmA&usqp=CAU" height={{base:"20px",md:"30px",xl:"30px"}} alt='Dan Abramov' />
+                <div class="rento-sprite rento-sprite-logo"></div>
+                <Box display={{base:"none",md:"inline-flex"}}><Simple_Modal /></Box>
             {/* <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
               <DesktopNav />
             </Flex> */}
@@ -70,14 +74,14 @@ import {
             justify={'flex-end'}
             direction={'row'}
             spacing={6}>
-            <Button
-
+           <Button
               as={'a'}
               fontSize={'sm'}
               fontWeight={400}
               variant={'link'}
-              href={'#'}>
-             <Icon as={AiOutlineShoppingCart} w={7}/> Cart
+              href="/home"
+            >
+             <Icon as={AiOutlineShoppingCart} w={7}/> Cart 
             </Button>
             <Button
             
@@ -248,19 +252,7 @@ import {
   
   const NAV_ITEMS= [
     {
-      label: 'Inspiration',
-      children: [
-        {
-          label: 'Explore Design Work',
-          subLabel: 'Trending Design to inspire you',
-          href: '/home',
-        },
-        {
-          label: 'New & Noteworthy',
-          subLabel: 'Up-and-coming Designers',
-          href: '#',
-        },
-      ],
+      label: <Input placeholder="Search"/>
     },
     {
       label: 'Find Work',
