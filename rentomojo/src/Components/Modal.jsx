@@ -69,9 +69,11 @@ const Cities=({city,handlecity})=>{
     )
 }
 export function Simple_Modal() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [city,setCity]=useState("Delhi");
   const handlecity=(city)=>{
-    setCity(city)
+    setCity(city);
+    onClose()
   }
     const OverlayOne = () => (
       <ModalOverlay
@@ -79,7 +81,6 @@ export function Simple_Modal() {
         backdropFilter='blur(10px) hue-rotate(90deg)'
       />
     )
-    const { isOpen, onOpen, onClose } = useDisclosure()
     return (
       <>
         <Button height={"30px"}
