@@ -64,7 +64,7 @@ export const Home=()=>{
             <ImageSlider></ImageSlider>
             <Boxes></Boxes>
             <FurnitureSlider></FurnitureSlider>
-            <SimpleThreeColumns></SimpleThreeColumns>
+            <SimpleThreeColumns ></SimpleThreeColumns>
         </div>
     )
 }

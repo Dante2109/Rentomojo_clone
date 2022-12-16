@@ -1,83 +1,8 @@
-import { AlertTitle, Box ,Button,Icon} from "@chakra-ui/react"
+import {  Box ,Button,Icon} from "@chakra-ui/react"
 import {BsArrowRightCircle,BsArrowLeftCircle} from "react-icons/bs";
 import styled from"./Carousel2.module.css"
-import { Card, CardHeader, CardBody, CardFooter,Image,Stack,Heading,Text,Divider,ButtonGroup } from '@chakra-ui/react'
-let data2=[  {
-  "image2": "https://www.rentomojo.com/bangalore/electronics/rent-oneplus-7-pro/91631",
-  "image": "https://p.rmjo.in/productSquare/mxzy0xf9-500x500.jpg",
-  "title": "OnePlus 7 Pro (Mirror Gray)",
-  "price": "1669",
-  "days": "3 days",
-  "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg",
-  "id": 4
+import { Card, CardBody, CardFooter,Image,Stack,Heading,Text,Divider } from '@chakra-ui/react'
 
-},  {
-  "id": 3000018,
-  "image": "https://p.rmjo.in/productSquare/e2nc1yzg-500x500.jpg",
-  "title": "LED TV - 40",
-  "price": 1269,
-  "stock": "available",
-  "category": "telivision",
-  "days": "3 days",
-  "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg"
-},      {
-  "id": 3000012,
-  "image": "https://p.rmjo.in/productSquare/z227w1xz-500x500.jpg",
-  "title": "Semi Automatic Washing Machine",
-  "price": 479,
-  "stock": "available",
-  "category": "washingmachine",
-  "days": "2 days",
-  "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg"
-},    
-{
-  "id": 300005,
-  "image": "https://p.rmjo.in/productSquare/x0to9y4x-500x500.jpg",
-  "title": "Mini Fridge",
-  "price": 449,
-  "stock": "available",
-  "category": "fridge",
-  "days": "3 days",
-  "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg"
-},      
-{  "image": "https://p.rmjo.in/productSquare/sk1pofns-500x500.jpg",
-"title": "Aurora Wooden Queen Bed (6x5)",
-"price": 539,
-"stock": "available",
-"category": "bedroom",
-"delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg",
-"days": "3 days",
-"id": 124
-},   {
-  "image": "https://p.rmjo.in/productSquare/75pzthwi-500x500.jpg",
-  "title": "Napster Metal Single Bed (6x3)",
-  "price": 249,
-  "stock": "available",
-  "category": "bedroom",
-  "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg",
-  "days": "3 days",
-  "id": 7
-},
-{
-  "image": "https://p.rmjo.in/productSquare/1eoam6o5-500x500.jpg",
-  "title": "Poise Study Table",
-  "price": 229,
-  "stock": "available",
-  "category": "wfh",
-  "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg",
-  "days": "3 days",
-  "id": 117
-},{
-  "image": "https://p.rmjo.in/productSquare/s9wlr8o3-500x500.jpg",
-  "title": "Poise Wooden King Bed (6x6)",
-  "price": 669,
-  "stock": "Out of stock",
-  "category": "bedroom",
-  "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg",
-  "days": "3 days",
-  "id": 9
-}
-]
 let data=[
     {
         "image2": "https://www.rentomojo.com/bangalore/electronics/rent-oneplus-7-pro/91631",
@@ -163,7 +88,7 @@ let data=[
         "id": 18
       },      {
         "id": 1,
-        "img": "https://p.rmjo.in/productSquare/em6h6xgy-500x500.jpg",
+        "image": "https://p.rmjo.in/productSquare/em6h6xgy-500x500.jpg",
         "title": "Stuart Study Table",
         "price": "149",
         "o_price": "72"
@@ -243,21 +168,27 @@ let data=[
 ]
 
 export const FurnitureSlider=()=>{
-
   const btnpressprev=()=>{
-    boxel.scrollLeft+=300
     let boxel=document.querySelector(`.${styled.product_container}`);
+    boxel.scrollLeft-=400
     console.log("hek")
-    console.log(boxel)
+    console.log(boxel.scrollLeft)
+  }
+  const btnpressnext=()=>{
+    let boxel=document.querySelector(`.${styled.product_container}`);
+    boxel.scrollLeft+=400
+    console.log(boxel.scrollLeft)
+
   }
     return(
-        <Box  className={styled.carousel}>
+        <Box  className={styled.carousel} py="60px">
+            <Text width={"130px"} textAlign={"left"} color="black">You'll love to take these Home!!</Text>
             <Box className={styled.Button_container} >
-            <Button className={styled.buttons} ><Icon as={BsArrowRightCircle}/></Button>
+            <Button className={styled.buttons} onClick={btnpressnext}><Icon as={BsArrowRightCircle}/></Button>
             <Button className={styled.buttons} onClick={btnpressprev}><Icon as={BsArrowLeftCircle}/></Button>
             </Box>
             <Box className={styled.product_container} id="productsss" >
-                {data2.map(el=><Cards image={el.image} key={Date.now()+el.id} title={el.title} price={el.price}></Cards>)}
+                {data.reverse().map(el=><Cards image={el.image} key={Date.now()+el.id} title={el.title} price={el.price}></Cards>)}
             </Box>
         </Box>
     )
@@ -268,8 +199,8 @@ const Cards=({image,
   price,
   })=>{
 
-return <Card minW={"350px"} className={styled.card}>
-  <CardBody>
+return <Card minW={"350px"} bg={"white"} rounded="3xl" className={styled.card}>
+  <CardBody >
     <Image
       src={image}
       alt={title}

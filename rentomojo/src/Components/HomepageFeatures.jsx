@@ -1,6 +1,5 @@
-import { ReactElement } from 'react';
-import { Box, SimpleGrid, Icon, Text, Stack, Flex,Image } from '@chakra-ui/react';
-import { FcAssistant, FcDonate, FcInTransit } from 'react-icons/fc';
+
+import { Box, SimpleGrid, Text, Stack, Image } from '@chakra-ui/react';
 import Starbed from "../Photos/Icons/Starbed.png"
 import Setting from "../Photos/Icons/Setting.png"
 import Location from "../Photos/Icons/Location.png"
@@ -20,7 +19,7 @@ const Feature = ({ title, text,icon}) => {
 
 export default function SimpleThreeColumns() {
   return (
-    <Box p={4} textAlign={"left"} fontSize="xs" maxW={"80%"} margin="auto">
+    <Box  p={4} textAlign={"left"} fontSize="xs" maxW={"80%"} margin="auto" my={"100px"}>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
         <Feature
           icon={Starbed}
