@@ -1,5 +1,6 @@
 import {Routes,Route} from "react-router-dom";
 import { Appliances } from "./Appliances";
+import { Cart } from "./Cart";
 import { Electronics } from "./Electronics";
 import { Fitness } from "./Fitness";
 import { Furniture } from "./Furniture";
@@ -16,6 +17,7 @@ export const Allroutes=()=>{
             <Route path="/furniture" element={<Furniture/>}/>
             <Route path="/packages" element={<Packages/>}/>
             <Route path="/wfh" element={<Wfh/>}/>
+            <Route path="/cart" element={<Cart/>}/>
         </Routes>
     )
 }

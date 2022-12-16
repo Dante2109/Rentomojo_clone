@@ -12,6 +12,8 @@ import Electronics from "../Photos/Icons/Electronics.png"
 import Gym from "../Photos/Icons/Gym.png"
 import Wfh from "../Photos/Icons/Wfh.png"
 import { NavLink } from "react-router-dom"
+import SimpleThreeColumns from "../Components/HomepageFeatures"
+import { FurnitureSlider } from "../Components/Carousel2"
 const Products=[
   {
     href:"/packages",
@@ -61,6 +63,8 @@ export const Home=()=>{
         <div> 
             <ImageSlider></ImageSlider>
             <Boxes></Boxes>
+            <FurnitureSlider></FurnitureSlider>
+            <SimpleThreeColumns></SimpleThreeColumns>
         </div>
     )
 }

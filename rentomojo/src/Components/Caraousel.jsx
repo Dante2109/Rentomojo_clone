@@ -3,7 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Home.module.css"
 import React from 'react'
-import { Box } from "@chakra-ui/react";
+import { border, Box } from "@chakra-ui/react";
+import { BiBorderRadius } from "react-icons/bi";
 const ImageSlider = () => {
     const images = [{
         id: 1,
@@ -33,18 +34,18 @@ const ImageSlider = () => {
     slidesToScroll: 1,
     lazyLoad: true,
     autoplay: true,
-  autoplaySpeed: 2000,
+  autoplaySpeed: 3000,
    
   };
   return (
     <>
 
-      <div className="imgslider" style={{width:"80%" ,align:"center" ,margin:"auto"}}>
+      <div className="imgslider" style={{width:"80%" ,align:"center" ,margin:"auto", }}>
         <Box  mt="2">
         <Slider {...settings}>
           {images.map((item) => (
             <div key={item.id}>
-              <img src={item.src}  alt={item.alt} />
+              <img style={{borderRadius:"20px"}} src={item.src}  alt={item.alt} />
             </div>
           ))}
         </Slider>

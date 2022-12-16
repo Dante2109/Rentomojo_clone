@@ -11,10 +11,8 @@ import {
     Stack,
     Collapse,
     Icon,
+    TagLeftIcon,
     Link,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
     useColorModeValue,
     useBreakpointValue,
     useDisclosure,
@@ -75,15 +73,17 @@ import {
             justify={'flex-end'}
             direction={'row'}
             spacing={6}>
-           <Button
+           <NavLink to="/cart">
+            <Button
               as={'a'}
               fontSize={'sm'}
               fontWeight={400}
               variant={'link'}
-              href="/home"
+              mt="10px"
             >
-             <Icon as={AiOutlineShoppingCart} w={7}/> Cart 
+             <TagLeftIcon as={AiOutlineShoppingCart} w={8}/>Cart 
             </Button>
+            </NavLink>
             <Button
             
               display={{ base: 'none', md: 'inline-flex' }}
