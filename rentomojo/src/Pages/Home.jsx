@@ -1,67 +1,70 @@
-import { Heading } from "@chakra-ui/react"
-
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./Home.module.css"
-import React from 'react'
-import { Box } from "@chakra-ui/react";
-const ImageSlider = () => {
-    const images = [{
-        id: 1,
-        src: "https://s.rmjo.in/Fitness-offer-banner-for-Web--2.jpg",
-        alt: "Image 1"
-    },
-    {
-        id: 2,
-        src: "https://s.rmjo.in/AC-Offer-Banner-Web-.jpg",
-        alt: "Image 2 "
-    },
-    {
-        id: 3,
-        src: "https://s.rmjo.in/Paytm-Bank-Desktop-banner-%20(1).jpg",
-        alt: "Image 3"
-    },
-    {
-        id: 4,
-        src: "https://s.rmjo.in/WP-Web.png",
-        alt: "Image 4"
-    }
-    ];
-  const settings = {
-    infinite: true,
-    dots: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    lazyLoad: true,
-    autoplay: true,
-  autoplaySpeed: 1500,
-   
-  };
+import { 
+  Grid,
+  Box,
+  Text
+  ,Image,
+ } from "@chakra-ui/react"
+import ImageSlider from "../Components/Caraousel"
+import Package from "../Photos/Icons/Package.png"
+import Bed from "../Photos/Icons/Bed.png"
+import WashingMachine from "../Photos/Icons/WashingMachine.png"
+import Electronics from "../Photos/Icons/Electronics.png"
+import Gym from "../Photos/Icons/Gym.png"
+import Wfh from "../Photos/Icons/Wfh.png"
+import { NavLink } from "react-router-dom"
+import SimpleThreeColumns from "../Components/HomepageFeatures"
+import { FurnitureSlider } from "../Components/Carousel2"
+const Products=[
+  {
+    href:"/packages",
+    src:Package,
+    text:"Packages"
+  },
+  {
+    href:"/furniture",
+    src:Bed,
+    text:"Furniture"
+  },
+  {
+    href:"/appliances",
+    src:WashingMachine,
+    text:"Appliances"
+  },
+  {
+    href:"/electronics",
+    src:Electronics,
+    text:"Electronics"
+  },
+  {
+    href:"/fitness",
+    src:Gym,
+    text:"Fitness"
+  },
+  {
+    href:"/wfh",
+    src:Wfh,
+    text:"WFH Essentials"
+  },
+  
+]
+const Boxes=()=>{
   return (
-    <>
-
-      <div className="imgslider" style={{width:"80%" ,align:"center" ,margin:"auto"}}>
-        <Box  mt="2">
-        <Slider {...settings}>
-          {images.map((item) => (
-            <div key={item.id}>
-              <img src={item.src}  alt={item.alt} />
-            </div>
-          ))}
-        </Slider>
-        </Box>
-      </div>
-          </>
+    <Grid templateColumns={{base:'repeat(2,1fr)',sm:'repeat(4,1fr)',xl:'repeat(6,1fr)'}} justifyItems="flex-start" gap="20px" width="80%" m="auto" p="50px">
+      {Products.map(el=>
+        <NavLink  to={el.href}><Box py="10px" px={{base:"20px", md:"40px",xl:"50px"}} border={"1px solid #ebf0f4 "} transition="ease-in-out" transitionDuration={"400ms"} rounded={"md"} _hover={{boxShadow:"rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;"}}>
+        <Image boxSize={"50px"} m="auto" src={el.src} ></Image>
+         <Text  textDecoration="none" fontSize="xs">{el.text}</Text>
+     </Box></NavLink>)}
+    </Grid>
   )
 }
-export default ImageSlider;
-
-
 export const Home=()=>{
     return (
         <div> 
             <ImageSlider></ImageSlider>
+            <Boxes></Boxes>
+            <FurnitureSlider></FurnitureSlider>
+            <SimpleThreeColumns ></SimpleThreeColumns>
         </div>
     )
 }

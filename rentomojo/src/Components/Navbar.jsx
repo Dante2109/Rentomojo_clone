@@ -11,10 +11,8 @@ import {
     Stack,
     Collapse,
     Icon,
+    TagLeftIcon,
     Link,
-    Popover,
-    PopoverTrigger,
-    PopoverContent,
     useColorModeValue,
     useBreakpointValue,
     useDisclosure,
@@ -26,6 +24,7 @@ import {
     ChevronDownIcon,
     ChevronRightIcon,
   } from '@chakra-ui/icons';
+  import { NavLink } from "react-router-dom";
   import { AiOutlineShoppingCart } from "react-icons/ai";
 
 
@@ -33,7 +32,7 @@ import {
     const { isOpen, onToggle } = useDisclosure();
   
     return (
-      <Box >
+      <Box position="sticky" top="0" zIndex={1}>
         <Flex
           bg={useColorModeValue('white', 'gray.800')}
           color={useColorModeValue('gray.600', 'white')}
@@ -61,7 +60,7 @@ import {
             />
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-                <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8KdSf8-GojXhMVWiyraRD2RozGH1QAmMYmA&usqp=CAU" height={{base:"20px",md:"30px",xl:"30px"}} alt='Dan Abramov' />
+                <NavLink to="/"><Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8KdSf8-GojXhMVWiyraRD2RozGH1QAmMYmA&usqp=CAU" height={{base:"20px",md:"30px",xl:"30px"}} alt='Dan Abramov' /></NavLink>
                 <div class="rento-sprite rento-sprite-logo"></div>
                 <Box display={{base:"none",md:"inline-flex"}}><Simple_Modal /></Box>
             {/* <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -74,15 +73,17 @@ import {
             justify={'flex-end'}
             direction={'row'}
             spacing={6}>
-           <Button
+           <NavLink to="/cart">
+            <Button
               as={'a'}
               fontSize={'sm'}
               fontWeight={400}
               variant={'link'}
-              href="/home"
+              mt="10px"
             >
-             <Icon as={AiOutlineShoppingCart} w={7}/> Cart 
+             <TagLeftIcon as={AiOutlineShoppingCart} w={8}/>Cart 
             </Button>
+            </NavLink>
             <Button
             
               display={{ base: 'none', md: 'inline-flex' }}
@@ -106,52 +107,6 @@ import {
     );
   }
   
-  const DesktopNav = () => {
-    const linkColor = useColorModeValue('gray.600', 'gray.200');
-    const linkHoverColor = useColorModeValue('gray.800', 'white');
-    const popoverContentBgColor = useColorModeValue('white', 'gray.800');
-  
-    return (
-      <Stack direction={'row'} spacing={4}>
-        {NAV_ITEMS.map((navItem) => (
-          <Box key={navItem.label}>
-            <Popover trigger={'hover'} placement={'bottom-start'}>
-              <PopoverTrigger>
-                <Link
-                  p={2}
-                  href={navItem.href ?? '#'}
-                  fontSize={'sm'}
-                  fontWeight={500}
-                  color={linkColor}
-                  _hover={{
-                    textDecoration: 'none',
-                    color: linkHoverColor,
-                  }}>
-                  {navItem.label}
-                </Link>
-              </PopoverTrigger>
-  
-              {navItem.children && (
-                <PopoverContent
-                  border={0}
-                  boxShadow={'xl'}
-                  bg={popoverContentBgColor}
-                  p={4}
-                  rounded={'xl'}
-                  minW={'sm'}>
-                  <Stack>
-                    {navItem.children.map((child) => (
-                      <DesktopSubNav key={child.label} {...child} />
-                    ))}
-                  </Stack>
-                </PopoverContent>
-              )}
-            </Popover>
-          </Box>
-        ))}
-      </Stack>
-    );
-  };
   
   const DesktopSubNav = ({ label, href, subLabel }) => {
     return (
