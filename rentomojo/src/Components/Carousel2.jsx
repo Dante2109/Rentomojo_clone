@@ -110,16 +110,7 @@ let data=[
         "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg",
         "days": "3 days",
         "id": 23
-      },      {
-        "image": "https://p.rmjo.in/productSquare/yunuytfl-500x500.jpg",
-        "title": "Rowling Bookshelf Small",
-        "price": 109,
-        "stock": "available",
-        "category": "bedroom",
-        "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg",
-        "days": "3 days",
-        "id": 23
-      },      {
+      },   {
         "id": 300006,
         "image": "https://p.rmjo.in/productSquare/ry27prsa-500x500.jpg",
         "title": "Single Door Fridge (210 Litre)",
@@ -146,16 +137,7 @@ let data=[
         "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg",
         "days": "3 days",
         "id": 151
-      } ,{
-        "image": "https://p.rmjo.in/productSquare/durxsu1c-500x500.jpg",
-        "title": "Morris Office Chair",
-        "price": 199,
-        "stock": "available",
-        "category": "living",
-        "delivery": "https://www.rentomojo.com/public/images/fast-delivery/fast-delivery.svg",
-        "days": "3 days",
-        "id": 151
-      }  , {
+      } , {
         "image": "https://p.rmjo.in/productSquare/4mb23xd0-500x500.jpg",
         "title": "Atticus Wooden Single Platform Bed (6x3)",
         "price": 339,
@@ -181,8 +163,9 @@ export const FurnitureSlider=()=>{
 
   }
     return(
-        <Box  className={styled.carousel} py="60px">
-            <Text width={"130px"} textAlign={"left"} color="black">You'll love to take these Home!!</Text>
+        <Box className={styled.carousel} py="60px" >
+            <Text width={"130px"} textAlign={"left"} color="black" ml="2%">You'll love to take these Home!!</Text>
+            <hr className={styled.line} />
             <Box className={styled.Button_container} >
             <Button className={styled.buttons} onClick={btnpressnext}><Icon as={BsArrowRightCircle}/></Button>
             <Button className={styled.buttons} onClick={btnpressprev}><Icon as={BsArrowLeftCircle}/></Button>
@@ -209,15 +192,15 @@ return <Card minW={"350px"} bg={"white"} rounded="3xl" className={styled.card}>
       margin="auto"
     />
     <Stack mt='6' spacing='3'>
-      <Heading size='xs'>{title}</Heading>
+      <Heading size='xs' textAlign={"left"}>{title}</Heading>
       <Box display="flex" justifyContent="space-between">
       <Box>
       <Text color="grey">Rent</Text>
-      <Text color='blue.600' fontSize='2xl'>
+      <Text color='black' fontWeight={600} fontSize='sm'>
         ₹{price}
       </Text>
       </Box>
-      <Button>See More</Button>
+      <Button bg={"red.500"} color="white" fontSize="sm" size={"sm"}>See More</Button>
       </Box>
     </Stack>
   </CardBody>
