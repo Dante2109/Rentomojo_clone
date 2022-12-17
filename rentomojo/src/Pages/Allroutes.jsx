@@ -3,7 +3,7 @@ import { Home } from "./Home";
 export const Allroutes=()=>{
     return (
         <Routes>
-            <Route path="/home" element={<Home/>}/>
+            <Route path="/" element={<Home/>}/>
         </Routes>
     )
 }
