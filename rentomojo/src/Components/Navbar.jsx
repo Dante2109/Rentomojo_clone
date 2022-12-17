@@ -184,7 +184,6 @@ import {
             />
           )}
         </Flex>
-  
         <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
           <Stack
             mt={2}

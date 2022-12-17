@@ -14,6 +14,7 @@ import Wfh from "../Photos/Icons/Wfh.png"
 import { NavLink } from "react-router-dom"
 import SimpleThreeColumns from "../Components/HomepageFeatures"
 import { FurnitureSlider } from "../Components/Carousel2"
+import {FurnitureSlider2} from "../Components/Carousel3"
 const Products=[
   {
     href:"/packages",
@@ -65,6 +66,7 @@ export const Home=()=>{
             <Boxes></Boxes>
             <FurnitureSlider></FurnitureSlider>
             <SimpleThreeColumns ></SimpleThreeColumns>
+            <FurnitureSlider2></FurnitureSlider2>
         </div>
     )
 }

@@ -1,0 +1,6 @@
+.filter{
+    padding: 10px;
+    border: 1px solid;
+    border-color: rgb(224, 216, 216);
+    min-width: 200px;
+}
