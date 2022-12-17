@@ -1,24 +1,23 @@
 import { Box ,CardBody,CardFooter,Card,Image,Text,Heading,Divider,Stack,Button,SimpleGrid,Tag,TagLabel,TagLeftIcon} from "@chakra-ui/react"
 import { useEffect } from "react"
 import { useState } from "react"
-import file from "../db.json"
 import styled from "./Carousel2.module.css"
-import Delivery from "../Photos/Icons/Delivery.png"
 import { BsTruck } from "react-icons/bs";
-let data=file.furniture
-export const GridStructure=({value})=>{
+
+export const GridStructure=({value,data})=>{
     const [Data,setData]=useState(data)
+
     useEffect(()=>{
       if(value==""){
         setData(data)
       }else{
-      setData(data.filter(el=>el.category==value))
+      setData(data.filter(el=>el.category===value))
       }
     },[value])
     return (
         <Box>
            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-            {Data.map(el=><Cards image={el.image} key={Date.now()+el.id} days={el.days} title={el.title} price={el.price}></Cards>)}
+            {Data.map(el=><Cards image={el.image} key={Date.now()+el.id+Math.random()} days={el.days} title={el.title} price={el.price}></Cards>)}
             </SimpleGrid>
         </Box>
     )
@@ -28,7 +27,7 @@ const Cards=({image,
     price,
     days  
     })=>{ 
-      return <Card minW={"300px"} bg={"white"} rounded="3xl" className={styled.card2}>
+      return <Card minW={"250px"} bg={"white"} rounded="3xl" className={styled.card2}>
     <CardBody >
       <Image
         src={image}
