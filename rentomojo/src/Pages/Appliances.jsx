@@ -58,7 +58,7 @@ export const Appliances=()=>{
             </Accordion>
             </Box>
             <Box>
-                <GridStructure value={value} data={data}/>
+                <GridStructure value={value} data={data} value2={"appliances"}/>
             </Box>
         </Box>
         </Box>

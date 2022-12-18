@@ -52,7 +52,7 @@ export const Fitness=()=>{
             </Accordion>
             </Box>
             <Box>
-                <GridStructure value={value} data={data}/>
+                <GridStructure value={value} data={data} value2={"fitness"} />
             </Box>
         </Box>
         </Box>

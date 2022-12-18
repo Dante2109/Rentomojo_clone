@@ -1,14 +1,14 @@
-import { Box ,CardBody,CardFooter,Card,Image,Text,Heading,Divider,Stack,Button,SimpleGrid,Tag,TagLabel,TagLeftIcon} from "@chakra-ui/react"
+import { Box ,CardBody,Card,Image,Text,Heading,Divider,Stack,Button,SimpleGrid,Tag,TagLabel,TagLeftIcon} from "@chakra-ui/react"
 import { useEffect } from "react"
 import { useState } from "react"
 import styled from "./Carousel2.module.css"
 import { BsTruck } from "react-icons/bs";
-
-export const GridStructure=({value,data})=>{
+import { NavLink } from "react-router-dom";
+export const GridStructure=({value,data,value2})=>{
     const [Data,setData]=useState(data)
 
     useEffect(()=>{
-      if(value==""){
+      if(value===""){
         setData(data)
       }else{
       setData(data.filter(el=>el.category===value))
@@ -17,7 +17,7 @@ export const GridStructure=({value,data})=>{
     return (
         <Box>
            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-            {Data.map(el=><Cards image={el.image} key={Date.now()+el.id+Math.random()} days={el.days} title={el.title} price={el.price}></Cards>)}
+            {Data.map(el=><Cards image={el.image} key={Date.now()+el.id+Math.random()} days={el.days} title={el.title} price={el.price} link={el.id} value={value2}></Cards>)}
             </SimpleGrid>
         </Box>
     )
@@ -25,7 +25,9 @@ export const GridStructure=({value,data})=>{
 const Cards=({image,
     title,
     price,
-    days  
+    days,
+    value,
+    link  
     })=>{ 
       return <Card minW={"250px"} bg={"white"} rounded="3xl" className={styled.card2}>
     <CardBody >
@@ -51,7 +53,7 @@ const Cards=({image,
        </Tag>
         
         </Box>
-        <Button bg={"red.500"} color="white" fontSize="sm" size={"sm"} _hover={{backgroundColor:"red.200"}}>View More</Button>
+        <NavLink to={`/${value}/${link}`}><Button bg={"red.500"} color="white" fontSize="sm" size={"sm"} _hover={{backgroundColor:"red.200"}}>View More</Button></NavLink>
       </Stack>
     </CardBody>
     </Card>
