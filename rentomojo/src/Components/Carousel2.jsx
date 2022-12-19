@@ -2,7 +2,9 @@ import {  Box ,Button,Icon} from "@chakra-ui/react"
 import {BsArrowRightCircle,BsArrowLeftCircle} from "react-icons/bs";
 import styled from"./Carousel2.module.css"
 import { Card, CardBody, CardFooter,Image,Stack,Heading,Text,Divider } from '@chakra-ui/react'
-
+import { useToast } from "@chakra-ui/react";
+import { AuthContext } from "../Context/AuthContext";
+import { useContext } from "react";
 let data=[
     {
         "image2": "https://www.rentomojo.com/bangalore/electronics/rent-oneplus-7-pro/91631",
@@ -171,7 +173,7 @@ export const FurnitureSlider=()=>{
             <Button className={styled.buttons} onClick={btnpressprev}><Icon as={BsArrowLeftCircle}/></Button>
             </Box>
             <Box className={styled.product_container} id="productsss" >
-                {data.reverse().map(el=><Cards image={el.image} key={Date.now()+el.id} title={el.title} price={el.price}></Cards>)}
+                {data.reverse().map(el=><Cards image={el.image} key={Date.now()+el.id} title={el.title} price={el.price} prod={el}></Cards>)}
             </Box>
         </Box>
     )
@@ -180,8 +182,10 @@ export const FurnitureSlider=()=>{
 const Cards=({image,
   title,
   price,
+  prod
   })=>{
-
+    const toast=useToast()
+    const {totalItem,item,totalPrice,Price,setDetails}=useContext(AuthContext)
 return <Card minW={"350px"} bg={"white"} rounded="3xl" className={styled.card}>
   <CardBody >
     <Image
@@ -200,7 +204,29 @@ return <Card minW={"350px"} bg={"white"} rounded="3xl" className={styled.card}>
         ₹{price}
       </Text>
       </Box>
-      <Button bg={"red.500"} color="white" fontSize="sm" size={"sm"}>See More</Button>
+      <Button bg={"red.500"} color="white" fontSize="sm" size={"sm"} onClick={()=> {
+        if(item<4){
+        totalItem(item=>item+1);
+        totalPrice(p=>p+price);
+        setDetails(list=>[...list,prod]);
+        return (
+          toast({
+          title: 'Success',
+          description: "Product added to the cart",
+          status: 'info',
+          duration: 1000,
+          isClosable: true,
+        }))}else{
+            return(
+              toast({
+              title: 'Oops!',
+              description: "Maximum limit reached",
+              status: 'info',
+              duration: 1000,
+              isClosable: true,
+              }))
+        }
+      }}>Add to Cart</Button>
       </Box>
     </Stack>
   </CardBody>
