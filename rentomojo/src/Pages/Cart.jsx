@@ -1,19 +1,21 @@
-import { Box, Heading,Image,Button, Card, CardHeader, CardBody,Text,Center,Divider,Stack,CardFooter } from "@chakra-ui/react"
+import { Box, Heading,Image,Button,VStack, Card,StackDivider ,CardHeader, CardBody,Text,Center,Divider,Stack,CardFooter, useToast } from "@chakra-ui/react"
 import { useContext } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { AuthContext } from "../Context/AuthContext"
 import Noitem from "../Photos/Icons/Noitem.png"
 export const Cart=()=>{
     const {item,Price,details}= useContext(AuthContext)
-    console.log(Price,item,details)
     return (
         <Box textAlign={"center"}>
-             {item?<Summary Price={Price}/>:<Box my={"90px"} ><Image margin={"auto"}  width={"40%"} src={Noitem}>
+             {item?(<Box display={"flex"} justifyContent="space-evenly"><Summary Prrice={Price}/><Cartproducts details={details}/></Box>):<Box my={"90px"} ><Image margin={"auto"}  width={"40%"} src={Noitem}>
                 </Image> <NavLink to="/furniture"><Button bg="red" size={"sm"} fontWeight="400" _hover={{bg:"red.300"}} color="white">Browse Catalogue</Button></NavLink></Box>}
         </Box>
     )
 }
-const Summary=({Price})=>{
+const Summary=({Prrice})=>{
+    const toast=useToast();
+    const {totalItem,item,totalPrice,Price,details,setDetails}=useContext(AuthContext);
+    const navigate=useNavigate()
     return (<Card>
         <CardHeader>
           <Heading size='md'>Order Summary</Heading>
@@ -30,7 +32,7 @@ const Summary=({Price})=>{
                 Refudnable Deposit
               </Text>
                <Text pt='2' fontSize='sm'>
-               ₹{Price+0.23*Price}
+               ₹{(Prrice+0.23*Prrice).toFixed(2)}
               </Text>
               </Box>
                <Box display="flex" justifyContent="space-between">
@@ -55,7 +57,7 @@ const Summary=({Price})=>{
                 Products Rent
               </Text>
                <Text pt='2' fontSize='sm'>
-               ₹{Price}
+               ₹{Prrice}
               </Text>
               </Box>
                <Box display="flex" justifyContent="space-between">
@@ -75,22 +77,41 @@ const Summary=({Price})=>{
                 Total Monthly Rent
               </Text>
                <Text pt='2' fontSize='sm'>
-              ₹1209/mo
+              ₹{Prrice+120}/mo
               </Text>
          
               </Box>
             </Box>
           </Box>
+          <Button m="20px" bg="red" color={"white"} _hover={{bg:"red.400"}} onClick={()=>{totalItem(0);totalPrice(0);setDetails([]);return(
+            toast({
+            title: 'Order Placed Successfully',
+            description: "Your order will be deliverd in a 3-4 working days",
+            status: 'success',
+            duration: 3000,
+            position:"top",
+            isClosable: true,
+            onCloseComplete:()=>{navigate("/")}
+        }))}} >One-Click Payment</Button>
         </CardBody>
+  
       </Card>)
 }
 
 const Cartproducts=({details})=>{
-        return{
-        }
+    console.log("Cartproduct")
+        return(
+            <VStack divider={<StackDivider borderColor='gray.200' />}
+    spacing={4} mt="20px">
+    {details.map((el,i)=><Cartproduct index={i} title={el.title} rent={el.price} img={el.image}/>)}
+                </VStack>
+            
+        )
 }
-const Cartproduct=({title,rent})=>{
+const Cartproduct=({title,rent,img,index})=>{
+    console.log("ikke")
     const {totalItem,item,totalPrice,Price,details,setDetails}=useContext(AuthContext);
+    console.log(Price,item,details)
     return(
         <Card
   direction={{ base: 'column', sm: 'row' }}
@@ -98,12 +119,13 @@ const Cartproduct=({title,rent})=>{
   variant='outline'
   size="xs"
   p={2}
+  maxW={"400px"}
   
 >
   <Image
     objectFit="cover"
     boxSize="100px"
-    src='https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60'
+    src={img}
     alt='Caffe Latte'
     px={2}
   />
@@ -111,21 +133,21 @@ const Cartproduct=({title,rent})=>{
   <Stack>
     <CardBody >
       <Box display="flex" justifyContent="space-between" gap="40px" >
-      <Heading size='sm'>{title}</Heading>
-      <Button color="red">Delete</Button>
+      <Heading size='sm' textAlign={"left"}>{title}</Heading>
+      <Button color="red" onClick={()=>{setDetails(handleDetails(details,index));totalItem(prev=>prev-1);totalPrice(prev=>prev-rent);console.log(details);return Cart()}}>Delete</Button>
       </Box>
     </CardBody>
 
     <CardFooter display="flex" gap="30px">
-      <Text variant='solid' colorScheme='blue'>
+      <Text textAlign={"left"} color="grey" fontSize={"10px"}>
         Rent
-     <Text variant='solid' colorScheme='blue'>
+     <Text color="black" fontSize={"11px"}>
             ₹{rent}/mo
              </Text>
       </Text>
-      <Text variant='solid' colorScheme='blue'>
+      <Text textAlign={"left"} color="grey" fontSize={"10px"}>
         Deposit
-            <Text variant='solid' colorScheme='blue'>
+            <Text color="black" fontSize={"11px"} >
             ₹{rent+80}
              </Text>
       </Text>
@@ -134,4 +156,8 @@ const Cartproduct=({title,rent})=>{
 </Card>
     )
 
+}
+const handleDetails=(data,i)=>{
+    data.splice(i,1);
+    return data
 }

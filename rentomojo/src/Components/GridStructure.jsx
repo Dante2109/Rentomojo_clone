@@ -74,7 +74,7 @@ const Cards=({image,
             toast({
             title: 'Oops!',
             description: "Maximum limit reached",
-            status: 'info',
+            status: 'warning',
             duration: 1000,
             isClosable: true,
         }))}
