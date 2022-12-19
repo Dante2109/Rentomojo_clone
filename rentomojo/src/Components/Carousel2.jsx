@@ -221,7 +221,7 @@ return <Card minW={"350px"} bg={"white"} rounded="3xl" className={styled.card}>
               toast({
               title: 'Oops!',
               description: "Maximum limit reached",
-              status: 'info',
+              status: 'warning',
               duration: 1000,
               isClosable: true,
               }))

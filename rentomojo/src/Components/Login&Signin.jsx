@@ -67,7 +67,7 @@ export const TransitionExample=({setName})=> {
           return(
             toast({
               title: 'Signed in Successfully.',
-              description: "Welecome",
+              description: "Welcome",
               status: 'success',
               duration: 2000,
               isClosable: true,
