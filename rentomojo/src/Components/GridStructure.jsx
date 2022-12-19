@@ -1,24 +1,24 @@
-import { Box ,CardBody,CardFooter,Card,Image,Text,Heading,Divider,Stack,Button,SimpleGrid,Tag,TagLabel,TagLeftIcon} from "@chakra-ui/react"
-import { useEffect } from "react"
+import { Box ,CardBody,Card,Image,Text,Heading,Divider,Stack,Button,SimpleGrid,Tag,TagLabel,TagLeftIcon, useToast} from "@chakra-ui/react"
+import { useContext, useEffect } from "react"
 import { useState } from "react"
-import file from "../db.json"
 import styled from "./Carousel2.module.css"
-import Delivery from "../Photos/Icons/Delivery.png"
 import { BsTruck } from "react-icons/bs";
-let data=file.furniture
-export const GridStructure=({value})=>{
-    const [Data,setData]=useState(data)
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
+
+export const GridStructure=({value,data,value2})=>{
+  const [Data,setData]=useState(data)
     useEffect(()=>{
-      if(value==""){
+      if(value===""){
         setData(data)
       }else{
-      setData(data.filter(el=>el.category==value))
+      setData(data.filter(el=>el.category===value))
       }
     },[value])
     return (
         <Box>
            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-            {Data.map(el=><Cards image={el.image} key={Date.now()+el.id} days={el.days} title={el.title} price={el.price}></Cards>)}
+            {Data.map(el=><Cards image={el.image} key={Date.now()+el.id+Math.random()} days={el.days} title={el.title} price={el.price} link={el.id} value={value2} prod={el}></Cards>)}
             </SimpleGrid>
         </Box>
     )
@@ -26,9 +26,14 @@ export const GridStructure=({value})=>{
 const Cards=({image,
     title,
     price,
-    days  
+    days,
+    value,
+    link,prod  
     })=>{ 
-      return <Card minW={"300px"} bg={"white"} rounded="3xl" className={styled.card2}>
+    const toast=useToast()
+    const {totalItem,item,totalPrice,Price,setDetails}=useContext(AuthContext)
+
+      return <Card minW={"250px"} bg={"white"} rounded="3xl" className={styled.card2}>
     <CardBody >
       <Image
         src={image}
@@ -52,7 +57,29 @@ const Cards=({image,
        </Tag>
         
         </Box>
-        <Button bg={"red.500"} color="white" fontSize="sm" size={"sm"} _hover={{backgroundColor:"red.200"}}>View More</Button>
+       <Button onClick={()=>{
+        if(item<4){
+        totalItem(item=>item+1);
+        totalPrice(p=>p+price);
+        setDetails(list=>[...list,prod]);
+        return (
+          toast({
+          title: 'Success',
+          description: "Product added to the cart",
+          status: 'info',
+          duration: 1000,
+          isClosable: true,
+        }))}else{
+          return(
+            toast({
+            title: 'Oops!',
+            description: "Maximum limit reached",
+            status: 'info',
+            duration: 1000,
+            isClosable: true,
+        }))}
+      }
+      } bg={"red.500"} color="white" fontSize="sm" size={"sm"} _hover={{backgroundColor:"red.200"}}>Add To Cart</Button>
       </Stack>
     </CardBody>
     </Card>

@@ -7,6 +7,8 @@ import { Furniture } from "./Furniture";
 import { Home } from "./Home";
 import { Packages } from "./Packages";
 import { Wfh } from "./WFH";
+import { SingleProduct } from "./SingleProduct";
+import { NotFound } from "./NotFoundPage";
 export const Allroutes=()=>{
     return (
         <Routes>
@@ -18,6 +20,8 @@ export const Allroutes=()=>{
             <Route path="/packages" element={<Packages/>}/>
             <Route path="/wfh" element={<Wfh/>}/>
             <Route path="/cart" element={<Cart/>}/>
+            <Route path="/:products/:id" element={<SingleProduct/>}/>
+            <Route path= "*" element={<NotFound/>}  />
         </Routes>
     )
 }

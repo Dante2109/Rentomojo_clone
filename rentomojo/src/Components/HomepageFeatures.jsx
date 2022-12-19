@@ -19,9 +19,9 @@ const Feature = ({ title, text,icon}) => {
 
 export default function SimpleThreeColumns() {
   return (
-    <Box  p={4} textAlign={"left"} fontSize="xs" maxW={"80%"} margin="auto" my={"100px"}>
+    <Box  p={4} textAlign={"left"} fontSize="sm" maxW={"80%"} margin="auto" my={"100px"}>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-        <Feature
+        <Feature 
           icon={Starbed}
           title={'Finest-quality products'}
           text={

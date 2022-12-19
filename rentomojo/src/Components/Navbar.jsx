@@ -1,6 +1,6 @@
 import Logo from "../Photos/Daco_6048519.png"
 import {Simple_Modal} from "./Modal"
-import React from "react";
+import React, { useContext,useState } from "react";
 import {
     Box,
     Flex,
@@ -16,7 +16,7 @@ import {
     useColorModeValue,
     useBreakpointValue,
     useDisclosure,
-    Image
+    Image,Menu,MenuButton,MenuList,TagLabel, useToast
   } from '@chakra-ui/react';
   import {
     HamburgerIcon,
@@ -26,10 +26,15 @@ import {
   } from '@chakra-ui/icons';
   import { NavLink } from "react-router-dom";
   import { AiOutlineShoppingCart } from "react-icons/ai";
-
+  import { TransitionExample } from "./Login&Signin";
+  import { AuthContext } from "../Context/AuthContext";
+  import { BiLogOut} from "react-icons/bi";
+  
 
   export default function Navbar() {
+    const {isAuth,setAuth}=useContext(AuthContext)
     const { isOpen, onToggle } = useDisclosure();
+    const [name,setName]=useState("")
   
     return (
       <Box position="sticky" top="0" zIndex={1}>
@@ -63,9 +68,6 @@ import {
                 <NavLink to="/"><Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8KdSf8-GojXhMVWiyraRD2RozGH1QAmMYmA&usqp=CAU" height={{base:"20px",md:"30px",xl:"30px"}} alt='Dan Abramov' /></NavLink>
                 <div class="rento-sprite rento-sprite-logo"></div>
                 <Box display={{base:"none",md:"inline-flex"}}><Simple_Modal /></Box>
-            {/* <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
-              <DesktopNav />
-            </Flex> */}
           </Flex>
             <Input display={{base:"none",md:"inline-flex"}} placeholder="Search" width={[80,100,200,250,300]} mr="10px" />
           <Stack
@@ -84,19 +86,7 @@ import {
              <TagLeftIcon as={AiOutlineShoppingCart} w={8}/>Cart 
             </Button>
             </NavLink>
-            <Button
-            
-              display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
-              fontWeight={400}
-              color={'white'}
-              bg={'red'}
-              href={'#'}
-              _hover={{
-                bg: 'pink.300',
-              }}>
-              Login/Sign Up
-            </Button>
+              {isAuth?<Profile Name={name} setAuth={setAuth}/>:<TransitionExample setName={setName} />}
           </Stack>
         </Flex>
   
@@ -232,3 +222,22 @@ import {
       href: '#',
     },
   ];
+
+  const Profile=({Name,setAuth})=>{
+    const toast=useToast()
+   return <Menu>
+  <MenuButton as={Button} >
+    {Name}
+  </MenuButton>
+  
+  <MenuList cursor={"pointer"} onClick={()=>{setAuth(false);return(toast({
+          title: 'Warning!',
+          description: "You have been logged out",
+          status: 'warning',
+          duration: 2000,
+          isClosable: true,
+        }))}}>
+    Logout
+  </MenuList>
+</Menu>
+  }

@@ -7,14 +7,24 @@ import {
     AccordionButton,
     AccordionPanel,
     Text,
-    AccordionIcon,Stack
+    AccordionIcon,Stack,Breadcrumb,BreadcrumbItem,BreadcrumbLink
  } from '@chakra-ui/react'
+import {ChevronRightIcon } from "@chakra-ui/icons"
 import React from "react"
 import style from "./Furniture.module.css"
 import { GridStructure } from "../Components/GridStructure"
+import file from "../db.json"
+import { Minibar } from "../Components/Minibar"
+let data=file.furniture
+
 export const Furniture=()=>{
     const [value, setValue] = React.useState('')
     return (
+        <Box>
+            <Box p={"10px"} bg="#e2eaf5" mb="10px" display={"flex"} justifyContent={"space-between"}>
+            <Linkage A2={"Furniture"} A3={value.charAt(0).toUpperCase() + value.slice(1)}/>
+            <Minibar></Minibar>
+            </Box>
         <Box display={"flex"} w={"90%"} margin="auto">
             <Box  >          
             <Accordion className={style.filter}  defaultIndex={[0]} allowMultiple>
@@ -42,9 +52,27 @@ export const Furniture=()=>{
             </Accordion>
             </Box>
             <Box>
-                <GridStructure value={value}/>
+                <GridStructure value={value} data={data}/>
             </Box>
         </Box>
-        
+        </Box>
     )
 }
+
+const Linkage=({A2,A3})=>{
+    return  <Breadcrumb spacing='8px' fontSize={"xs"}  separator={<ChevronRightIcon color='gray.500' />}>
+    <BreadcrumbItem>
+      <BreadcrumbLink fontSize={"xs"} href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+  
+    <BreadcrumbItem>
+      <BreadcrumbLink fontSize={"xs"} href='/furniture'>{A2}</BreadcrumbLink>
+    </BreadcrumbItem>
+  
+    <BreadcrumbItem isCurrentPage>
+      <BreadcrumbLink fontSize={"xs"} href='#'>{A3}</BreadcrumbLink>
+    </BreadcrumbItem>
+      </Breadcrumb>
+  }
+
+

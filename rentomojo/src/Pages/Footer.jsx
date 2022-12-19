@@ -15,7 +15,6 @@ import {BsFacebook} from "react-icons/bs"
 import {AiFillTwitterCircle,AiFillDribbbleCircle} from "react-icons/ai"
 import { BiPaperPlane,BiUpArrowAlt} from "react-icons/bi";
 import AppStoreBadge from '../Photos/pngegg.png';
-import Plane from "../Photos/Icons/Plane.png"
 const ListHeader = ({ children }) => {
   return (
     <Text fontWeight={'500'} fontSize={'11px'} mb={2}>
@@ -61,8 +60,8 @@ export default function Footer() {
   return (
     <Box
       bg={useColorModeValue('gray.50', 'gray.900')}
-      color={useColorModeValue('gray.700', 'gray.200')}
-      fontSize="10px">
+      color={useColorModeValue('gray.600', 'gray.200')}
+      fontSize="12px">
         <Box textAlign="left" maxW="81%" pt={"50px"}  display={{base:"none",md:"block"}} margin="auto">
             <Text fontWeight={600}>Embrace Your Dream Lifestyle With RentoMojo In Mumbai</Text>
             <Text objectFit={"cover"}>RentoMojo is one of India’s best-known rental brands with a pan-India presence. You can rent furniture, appliances, and electronics from us in Mumbai for a monthly fee. Instead of paying tens of thousands to purchase said items from a store, you can rent them from us at a discounted price.</Text>
